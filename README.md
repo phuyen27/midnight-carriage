@@ -24,6 +24,7 @@ To host it on GitHub Pages: *Settings → Pages → Deploy from branch → `main
 | Doodle on the glass | Drag on the window |
 | Wave to the figure on the platform | Click them when a small station passes |
 | Notebook | **Sổ** button (letter, collection, stories, endings) |
+| Skip to the next station | **Tua ▸▸** button (top bar) |
 
 ## Project structure
 

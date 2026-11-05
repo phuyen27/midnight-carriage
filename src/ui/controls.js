@@ -23,6 +23,16 @@ $('nS').onclick = () => {
   $('note').style.display = 'none';
 };
 
+/** Skip ahead to the next station (the dissolve covers the cut). */
+$('bSk').onclick = () => {
+  if (ES || xfT < XF) return;
+  initAudio();
+  if (pax) hideSay();
+  pax = null;
+  stn = null;
+  nextStage();
+};
+
 let rc = 0;
 
 $('bRe').onclick = () => {
