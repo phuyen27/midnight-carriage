@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+    <title>Midnight Carriage</title>
+    <meta name="description" content="A cozy pixel-art night train where every passenger carries a word left unsaid." />
+    <meta property="og:title" content="Midnight Carriage" />
+    <meta property="og:description" content="A cozy pixel-art night train where every passenger carries a word left unsaid." />
+    <meta name="theme-color" content="#120c08" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <canvas id="c" width="320" height="180"></canvas>
+
+    <div id="ui">
+      <button id="bSo">Sổ</button>
+      <button id="bSnd">Âm: Bật</button>
+      <button id="bFs" title="Toàn màn hình">⛶</button>
+      <button id="bRe">Chơi lại</button>
+    </div>
+    <div id="toast"></div>
+    <div id="say"></div>
+
+    <div class="modal" id="book">
+      <div>
+        <div id="bk"></div>
+        <button id="bX">Đóng</button>
+      </div>
+    </div>
+    <div class="modal" id="note">
+      <div>
+        <h3>Nhật ký toa tàu</h3>
+        <textarea id="nt" maxlength="200" placeholder="Hôm nay bạn muốn viết gì?"></textarea>
+        <button id="nS">Lưu</button>
+        <button id="nX">Thôi</button>
+      </div>
+    </div>
+
+    <!-- Scripts share one global scope, so the load order below matters. -->
+    <script src="src/core/canvas.js"></script>
+    <script src="src/core/utils.js"></script>
+    <script src="src/core/storage.js"></script>
+    <script src="src/gfx/sprites.js"></script>
+    <script src="src/data/passengers.js"></script>
+    <script src="src/data/story.js"></script>
+    <script src="src/data/stages.js"></script>
+    <script src="src/core/state.js"></script>
+    <script src="src/audio/audio.js"></script>
+    <script src="src/gfx/passengers.js"></script>
+    <script src="src/scene/window-station.js"></script>
+    <script src="src/scene/seasons.js"></script>
+    <script src="src/scene/window.js"></script>
+    <script src="src/scene/room.js"></script>
+    <script src="src/scene/extras.js"></script>
+    <script src="src/game/decor.js"></script>
+    <script src="src/game/endings.js"></script>
+    <script src="src/game/collectibles.js"></script>
+    <script src="src/game/dialogue.js"></script>
+    <script src="src/input/pointer.js"></script>
+    <script src="src/ui/hud.js"></script>
+    <script src="src/ui/book.js"></script>
+    <script src="src/ui/controls.js"></script>
+    <script src="src/game/update.js"></script>
+    <script src="src/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "name": "Midnight Carriage",
+  "short_name": "Carriage",
+  "start_url": "./index.html",
+  "display": "fullscreen",
+  "orientation": "landscape",
+  "background_color": "#120c08",
+  "theme_color": "#120c08",
+  "icons": [
+    {
+      "src": "assets/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
