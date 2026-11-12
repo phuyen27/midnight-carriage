@@ -47,7 +47,7 @@ To host it on GitHub Pages: *Settings → Pages → Deploy from branch → `main
     └── ui/               # HUD, notebook, top-bar controls
 ```
 
-Each season rides its own seven stations (`SEASON_ST` in `src/data/stages.js`), and passengers change outfit and speak a different pair of opening lines per season (`PS` in `src/data/passengers.js`).
+Each station has one fixed passenger who boards there (`pp`), and the umbrella figure waits at one station per season (`w`); the last station of each season is a quiet bridge. Each season rides its own seven stations (`SEASON_ST` in `src/data/stages.js`), and passengers change outfit and speak a different pair of opening lines per season (`PS` in `src/data/passengers.js`).
 
 All scripts are classic `<script>` tags sharing one global scope. Keep the order in `index.html` when adding files.
 

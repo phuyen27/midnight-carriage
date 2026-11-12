@@ -2,19 +2,30 @@
  * The notebook modal: letter, collection, stories, diary and endings.
  */
 
+/** The letter as written so far, in passenger order so it always reads as one letter. */
+function letterHTML(done) {
+  const got = PX.filter((p) => S.frag[p.n]);
+  if (!got.length)
+    return '<p>Bạn mang theo một lá thư chỉ mới có dòng đầu. Sáu hành khách giữ sáu lời bạn chưa kịp nói: nghe họ, mỗi người sẽ giúp bạn viết thêm một dòng.</p>';
+  return (
+    '<p>Gửi người đã đợi ở ga cuối,</p>' +
+    got.map((p) => '<p>' + esc(S.frag[p.n]) + ' <i>(' + esc(p.n) + ')</i></p>').join('') +
+    (done
+      ? got.length >= 6
+        ? '<p>Cảm ơn người vì đã đợi. Mình đến rồi.</p>'
+        : '<p>…còn nhiều điều mình chưa kịp viết. Mong người đợi mình thêm một chuyến nữa.</p>'
+      : '') +
+    (done ? '<p>— Người gửi, trên chuyến tàu đêm.</p>' : '')
+  );
+}
+
 function openBook() {
   const fk = Object.keys(S.frag);
   let h =
     '<h3>Lá thư dang dở (' +
     fk.length +
     '/6)</h3>' +
-    (fk.length
-      ? '<p>Gửi người đã đợi ở ga cuối,</p>' +
-        fk.map((n) => '<p>“' + esc(S.frag[n]) + '” <i>(' + esc(n) + ')</i></p>').join('') +
-        (S.fin
-          ? '<p>— Người gửi, trên chuyến tàu đêm.</p><p><b>Bạn đã gom đủ lời nhắn. Lá thư sẽ được gửi ở ga cuối, và ngoài kia, trời sẽ sáng dần.</b></p>'
-          : '')
-      : '<p>Bạn mang theo một lá thư chưa viết xong. Hãy nghe hành khách kể chuyện, mỗi người sẽ để lại một dòng.</p>');
+    letterHTML(S.fin);
   if (((S.wsee | 0) & 15) == 15)
     h += '<p><i>Tái bút, bằng nét chữ lạ: “Tôi vẫn đang đợi bạn ở ga cuối.”</i></p>';
   h +=
@@ -88,7 +99,7 @@ const EC = {};
 function talkEnd(n) {
   const L = [
     EG[S.lastEnd | 0],
-    FR[n],
+    FQ[n],
     secretOK(n) ? TRUE[n] : 'Người ấy mỉm cười, như còn điều chưa muốn nói hết.',
     'Hẹn bạn ở chuyến sau.',
   ];

@@ -21,7 +21,7 @@ function nextStage() {
   xfT = 0;
   const b = [0, 3, 6].indexOf(si);
   if (b >= 0) setTimeout(() => toast('Chuyện mùa ' + SN[s1] + ': ' + SS[s1][b], 9000), 4200);
-  if (si == 5 && s1 == 3) setTimeout(() => toast(TH[S.truth], 4200), 4200);
+  if (si == 5 && s1 == 3) setTimeout(() => toast(TH, 4200), 4200);
   if (was == 6 && s0 == 3 && !S.fin) setTimeout(finale, 2500);
   const q = ST[si];
   if (q.r0 === undefined) q.r0 = q.rain;
@@ -70,16 +70,16 @@ function update(dt) {
     rainG.gain.setTargetAtTime(ST[si].rain ? 0.03 : 0, AC.currentTime, 0.5);
     windG.gain.setTargetAtTime(opn * 0.12, AC.currentTime, 0.4);
   }
-  if (!pax && stT > 3 && stT < LEN - 12) {
-    const d = PX[S.order[S.pi++ % 6]],
-      hl = sea() == 3 ? 2 : sea() >= 1 ? 0 : -1,
+  // each station has its own passenger (ST[si].pp); the closing bridge has nobody
+  if (!pax && ST[si].pp !== undefined && !ST[si].bd && stT > 3 && stT < LEN - 12) {
+    const d = PX[ST[si].pp],
       sy = [...PS[d.n][sea()], ''];
-    sy.splice(1, 0, SL[d.n][sea()]);
-    if (hl >= 0) sy.splice(sy.length - 1, 0, HT[S.truth][hl + (S.pi & 1)]);
+    ST[si].bd = 1;
+    if (sea() == 3) sy.splice(sy.length - 1, 0, HT[si & 1]);
     sy[sy.length - 1] = GL[d.n](SG[d.n][sea()]);
     if (secretOK(d.n)) sy.splice(sy.length - 1, 0, TRUE[d.n]);
-    save();
     pax = { d, say: sy, x: 340, y: 104, st: 'in', line: 0 };
+    toast(d.n + ' lên tàu ở ' + stName(ST[si]), 2800);
   }
   if (pax) {
     if (pax.st == 'in') {
@@ -183,9 +183,11 @@ function update(dt) {
     onc.x -= 520 * dt;
     if (onc.x < -190) onc = null;
   }
-  if (!stn && !onc && tun <= 0 && ST[si].k != 6 && stT > 5 && stT < LEN - 9 && (snT -= dt) <= 0) {
-    snT = rnd(22, 38);
+  // the waiting figure with the umbrella shows up once per season, at the station marked `w`
+  if (ST[si].w && !ST[si].wd && !stn && !onc && tun <= 0 && stT > 9 && stT < LEN - 14) {
+    ST[si].wd = 1;
     stn = { x: WW + 4, pg: [0, 1, 2, 3].filter((i) => ((S.wsee | 0) >> i) & 1).length, fo: 0 };
+    if (!pax || pax.st != 'talk') toast('Có người cầm ô đứng đợi trên sân ga, thử vẫy chào xem', 3500);
   }
   if (stn) {
     stn.x -= (40 + 12 * spd) * dt;

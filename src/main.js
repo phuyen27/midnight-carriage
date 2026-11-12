@@ -38,7 +38,7 @@ if (!S.intro) {
     () =>
       say(
         'Lá thư dang dở',
-        'Trong túi áo bạn có một lá thư chưa viết xong, mới có dòng đầu: “Gửi người đã đợi ở ga cuối,”. Có lẽ hành khách trên chuyến tàu đêm sẽ giúp bạn viết nốt. (chạm để đóng)',
+        'Bạn đang ngồi trên chuyến tàu đêm, tay cầm một lá thư mới có dòng đầu: “Gửi người đã đợi ở ga cuối,”. Sáu hành khách ở đây mỗi người giữ một lời bạn chưa kịp nói. Nghe họ kể, mỗi người sẽ giúp bạn viết thêm một dòng. Tàu chạy hết bốn mùa thì tới ga cuối, bạn nghe được càng nhiều, lá thư càng đầy. (chạm để đóng)',
       ),
     6500,
   );

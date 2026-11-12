@@ -61,20 +61,24 @@ function finale() {
   if (PX.every((p) => secretOK(p.n))) e = 8;
   else if ((S.wsee | 0) == 15 && fk >= 6 && S.seen[6]) e = 7;
   else if (fk >= 6 && ['leaf', 'shell', 'ticket', 'card', 'gift'].every((k) => ks.has(k))) e = 6;
-  else if (S.truth == 0) e = S.diary.length ? 0 : 1;
-  else if (S.truth == 1) e = S.st.w >= 40 ? 2 : 3;
-  else e = fk >= 5 ? 4 : 5;
+  // otherwise the ending follows how much of the letter was written
+  else if (fk >= 6) e = 4;
+  else if (fk >= 4) e = S.diary.length ? 0 : 2;
+  else if (fk >= 2) e = 3;
+  else e = fk == 1 ? 1 : 5;
   S.seen[e] = 1;
   S.lastEnd = e;
   save();
   $('bk').innerHTML =
+    '<h3>Lá thư bạn đã viết</h3>' +
+    letterHTML(1) +
     '<h3>' +
     esc(EN[e][0]) +
     '</h3><p>' +
     esc(EN[e][1]) +
     '</p><p><i>Kết thúc ' +
     Object.keys(S.seen).length +
-    '/9. Bấm Chơi lại để đi một chuyến khác, sự thật sẽ khác.</i></p>' +
+    '/9. Bấm Chơi lại để đi một chuyến khác: nghe thêm lời ai, lá thư sẽ đổi.</i></p>' +
     '<h3>Nói chuyện với hành khách</h3><div id="ft"><p>Chạm vào một người để trò chuyện.</p></div>' +
     PX.map((p) => '<span class="who" data-w="' + esc(p.n) + '">' + esc(p.n) + '</span>').join('');
   ES = { e, t: 0 };

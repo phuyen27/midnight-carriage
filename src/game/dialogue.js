@@ -45,10 +45,15 @@ function advance() {
       S.frag[pax.d.n] = fr;
       LW[pax.d.n] = 0;
       save();
+      const n = Object.keys(S.frag).length;
       toast(
         (ng ? 'Nhận được: ' + gf + ' · ' : '') +
-          'Lá thư ghim trên vách toa có thêm một dòng (chạm vào để đọc)',
-        4600,
+          'Lá thư có thêm dòng (' +
+          n +
+          '/6): “' +
+          fr +
+          '”',
+        7000,
       );
     } else if (ng) toast('Nhận được: ' + gf);
     else toast('Mùa này bạn đã có quà của họ rồi, cảm ơn vì đã ghé nghe.');

@@ -56,9 +56,11 @@ $('bRe').onclick = () => {
   S.wsee = ws;
   save();
   si = 0;
+  applySeason(sea());
   stT = 0;
   prevSky = 0;
   pax = null;
+  stn = null;
   fl = [];
   hideSay();
   toast('Chuyến tàu mới bắt đầu');

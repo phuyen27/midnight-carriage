@@ -25,7 +25,6 @@ const DEF = () => ({
   gifted: {},
   deco: {},
   radio: 0,
-  truth: (Math.random() * 3) | 0,
   order: [0, 1, 2, 3, 4, 5].sort(() => Math.random() - 0.5),
   st: { w: 0 },
   seen: {},

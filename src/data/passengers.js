@@ -91,102 +91,65 @@ const PX = [
 ];
 
 /**
- * What each passenger says when they first sit down, per season: two lines that follow the
- * arc of the year (spring: getting acquainted, summer: closer, autumn: a confession,
- * winter: letting go). Spring reuses the opening lines in PX[].say; the seasonal tale (SL),
- * hints, secret and gift line are woven in by update.js.
+ * What each passenger says when they sit down: two short lines per season [spring, summer,
+ * autumn, winter]. Each person owns one image that returns every season and changes a little:
+ * Bà Tư's scarf, Mướp's sunny window, the painter's missing eyes, the lantern's light,
+ * the empty chair at the tea table, the owl's named star.
  */
-const PS_MORE = {
+const PS = {
   'Bà Tư': [
-    [
-      'Hè này tàu đông hơn xưa. Bà chen mãi mới có chỗ cạnh cửa sổ, vì muốn ngắm cánh đồng cho rõ.',
-      'Bà vẫn đang đi thăm cháu đấy. Lần trước đến, nó đi vắng. Bà để lại bó rau ở cửa rồi về.',
-    ],
-    [
-      'Thu rồi mà bà vẫn chưa tới được nhà cháu. Tàu cứ chạy, ga cứ trôi, bà thì đếm từng ga một.',
-      'Bà nói thật nhé, bà không giận nó đâu. Bà chỉ muốn nó biết là bà vẫn đang đi.',
-    ],
-    [
-      'Khăn len đan xong rồi này. Bà đan hơi dài, để cháu quấn thêm hai vòng cũng còn dư.',
-      'Đi nhiều mùa thế, hóa ra bà chỉ cần ngồi cạnh một người trên tàu là đủ rồi.',
-    ],
+    ['Bà đi thăm cháu. Mười năm rồi.', 'Bà mang cuộn len theo, đan cho đỡ nhớ.'],
+    ['Bà đến nhà cháu. Cháu đi vắng.', 'Bà để lại bó rau ở cửa rồi về.'],
+    ['Khăn bà đan được nửa rồi.', 'Cháu đừng giận. Bà vẫn đang đi.'],
+    ['Khăn xong rồi. Dài lắm đấy.', 'Quấn hai vòng vẫn còn dư.'],
   ],
   'Chú mèo Mướp': [
-    [
-      'Meo, tàu hè nóng ghê. Chú nằm sát cửa sổ cho gió luồn qua bộ lông.',
-      'Chú thấy cháu quen lắm. Mùi áo cháu giống mùi chiếc ghế ở ga cuối ấy.',
-    ],
-    [
-      'Lá rơi đầy toa này. Chú định bắt một chiếc, nghĩ lại thấy để chúng rơi cũng hay.',
-      'Ngày xưa chú hay đợi ở ga cuối. Đợi mãi rồi quên mất mình đợi ai, chỉ nhớ là đợi vui lắm.',
-    ],
-    [
-      'Meo… Đông này chú không sợ lạnh nữa. Có tay áo của cháu rồi mà.',
-      'Chú ngủ trước nhé. Nếu cháu xuống ga, nhớ vỗ nhẹ lên lưng chú một cái.',
-    ],
+    ['Meo. Ga cuối có ô cửa đầy nắng.', 'Chú định đến đó ngủ một giấc.'],
+    ['Meo. Nóng quá, chú nằm sát cửa sổ.', 'Áo cháu có mùi ga cuối đấy.'],
+    ['Chú từng đợi ở ga cuối. Lâu lắm.', 'Quên mất đợi ai. Chỉ nhớ là vui.'],
+    ['Chú chui vào tay áo cháu nhé.', 'Ấm rồi. Chú ngủ đây.'],
   ],
   'Anh họa sĩ': [
-    [
-      'Hè này tôi vẽ nhanh hơn mọi mùa. Cảnh trôi qua cửa sổ vội lắm, tay tôi phải chạy theo.',
-      'Có một gương mặt tôi vẽ hoài mà chưa xong. Tôi cứ để trống đôi mắt, vì chưa dám nhìn kỹ.',
-    ],
-    [
-      'Em để ý không, bức nào của tôi cũng có một người ngồi ở góc toa. Tôi không định vẽ ai cả, tay tự vẽ.',
-      'Có lẽ tôi muốn đưa tận tay người ấy một bức. Chỉ là chưa tìm được lời mở đầu.',
-    ],
-    [
-      'Đông tôi chỉ còn hai màu nên vẽ ít hơn. Mà lạ, ít hơn lại thấy đủ hơn.',
-      'Bức này tôi vẽ xong đôi mắt rồi. Em xem đi, nó giống em hơn tôi tưởng.',
-    ],
+    ['Tôi vẽ những ga chẳng ai nhớ tên.', 'Cảnh đẹp nhất là lúc nó trôi qua.'],
+    ['Tôi vẽ một gương mặt hoài chưa xong.', 'Đôi mắt vẫn để trống.'],
+    ['Bức nào cũng có người ngồi góc toa.', 'Tôi chưa dám đưa tận tay.'],
+    ['Tôi vẽ xong đôi mắt rồi.', 'Em xem. Giống em lắm.'],
   ],
   'Bé Đèn Lồng': [
-    [
-      'Hè em đi bắt đom đóm cả đêm! Đèn lồng của em lúc nào cũng đông khách.',
-      'Em vẫn đi tìm ông. Em nghĩ ông ngồi ở một toa xa lắm, đi mãi mới tới.',
-    ],
-    [
-      'Chị ơi, trăng rằm to ghê. Em xách đèn đi mà thấy trăng cũng đang đi theo em.',
-      'Em hỏi nhỏ nhé: nếu mình tìm mãi mà không thấy ông, thì ông có buồn không?',
-    ],
-    [
-      'Đèn em sáng lâu hơn rồi đó. Em che tay hoài mà giờ hết thấy nóng luôn.',
-      'Em nghĩ ông không ở ga nào hết. Chắc ông ở chỗ nào có ánh đèn em thắp.',
-    ],
+    ['Em đi tìm ông. Ông ở nơi nhiều đèn.', 'Đèn em còn nhỏ xíu.'],
+    ['Em bắt đom đóm bỏ vào đèn.', 'Đèn sáng hơn rồi nè.'],
+    ['Trăng rằm to ghê. Nó theo em suốt.', 'Tìm mãi không thấy ông, ông có buồn không?'],
+    ['Đèn em sáng lâu rồi đó.', 'Chắc ông ở chỗ nào có đèn em thắp.'],
   ],
   'Bác lái buôn': [
-    [
-      'Hè bác bán trà đá, hết veo từ sáng. Chiều về chỉ còn lại một ấm cho mình.',
-      'Bác ít nói, cháu đừng ngại. Nghe cháu thở dài là bác biết cháu đang nghĩ gì.',
-    ],
-    [
-      'Thu này bác sảo được mẻ trà ngon nhất đời. Bác để dành, tính khi gặp con thì pha.',
-      'Ga nào bác cũng để trống một ghế. Quen rồi, ai ngồi xuống bác cũng thấy mừng.',
-    ],
-    [
-      'Tách trà này bác pha hơi đậm. Đông mà, phải đậm mới đủ ấm cho hai người.',
-      'Bác nói ít, nhưng nay bác nói một câu: bác mừng vì có cháu ngồi cùng.',
-    ],
+    ['Bác bán trà cả đời.', 'Trà ngon cần một người ngồi cùng.'],
+    ['Bác ít nói. Cháu đừng ngại.', 'Bác để trống một ghế, quen rồi.'],
+    ['Mẻ trà này ngon nhất đời bác.', 'Bác để dành, chờ người đến uống.'],
+    ['Trà bác pha hơi đậm.', 'Đủ ấm cho hai người.'],
   ],
   'Cú Hiền': [
-    [
-      'Hú… Hè đêm ngắn nhưng sao nhiều. Ta đếm không xuể, đành đặt tên cho vài ngôi.',
-      'Con có ngôi sao nào hay nhìn không? Ta để ý, đêm nào con cũng nhìn một ngôi ấy.',
-    ],
-    [
-      'Gió thu mang mùi khói bếp. Ta nghe gió nói ở xa có người đang nhớ con.',
-      'Ta thức đêm quen rồi. Có những đêm ta chỉ canh một người ngủ không yên.',
-    ],
-    [
-      'Hú… Đêm đông dài nhất, ta vẫn canh. Nhưng lần này ta canh nhẹ tay hơn, vì con đã bớt lo.',
-      'Sắp sáng rồi. Ta sẽ ngủ một giấc, còn con cứ đi tiếp, đèn ga vẫn sáng.',
-    ],
+    ['Hú. Ta canh sao suốt đêm.', 'Sao đi chậm, chẳng ai phải vội.'],
+    ['Con hay nhìn một ngôi sao.', 'Ta nhớ rồi. Ta đặt tên cho nó.'],
+    ['Gió mang mùi khói bếp.', 'Có ai ở xa đang nhớ con.'],
+    ['Sắp sáng rồi.', 'Ta ngủ đây. Con cứ đi tiếp.'],
   ],
 };
-
-/** PS[name][season] = the two opening lines for that season. */
-const PS = Object.fromEntries(PX.map((p) => [p.n, [[p.say[0], p.say[1]], ...PS_MORE[p.n]]]));
-
+/**
+ * The letter, one line per passenger, in the writer's own voice. Each line is the word
+ * that passenger stands for; together they read as one letter to the person who waited.
+ * Always shown in PX order (see letterHTML in book.js).
+ */
 const FR = {
+  'Bà Tư': 'Xin lỗi người, mình chưa một lần về thăm.',
+  'Chú mèo Mướp': 'Hôm nào người cũng chờ, mà mình không tới.',
+  'Anh họa sĩ': 'Có điều mình chưa dám đưa tận tay người.',
+  'Bé Đèn Lồng': 'Hồi nhỏ mình thả đèn, mong người nhìn thấy.',
+  'Bác lái buôn': 'Mình thương người hơn những gì mình từng nói.',
+  'Cú Hiền': 'Đêm không ngủ được, mình vẫn nghĩ về người.',
+};
+
+/** Each passenger's own parting words (used in the epilogue chat). */
+const FQ = {
   'Bà Tư': 'Có những chuyến đi dài mười năm, chỉ để được ngồi cạnh một người.',
   'Chú mèo Mướp': 'Ở ga cuối có một ô cửa đầy nắng, đủ chỗ cho cả hai ta.',
   'Anh họa sĩ': 'Tôi không giữ được cảnh trôi qua, nên tôi giữ lại cảm giác được ngắm nó.',

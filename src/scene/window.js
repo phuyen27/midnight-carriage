@@ -295,11 +295,16 @@ function outside(dt) {
       R('#f4ecd8', fx - 5, fy + 1, 3, 4);
       R('#c8b898', fx - 5, fy + 2, 3, 1);
     }
-    if (se < 2) {
-      R(se ? '#c8402a' : '#a05a3a', fx + 7, fy + 3, 1, 11);
-      R('#e8d8a0', fx + 7, fy + 2, 1, 1);
-    } else if (se == 2) R('#fff6e0', fx + 6, fy + 6, 3, 4);
-    else {
+    // the umbrella: open in spring, summer and autumn, folded under the arm in winter
+    if (se < 3) {
+      const uc = ['#d8647a', '#4a8ac8', '#d8802a'][se];
+      R(uc, fx - 2, fy - 2, 10, 2);
+      R(uc, fx - 1, fy - 3, 8, 1);
+      R(uc, fx + 1, fy - 4, 4, 1);
+      R('#e8d8a0', fx + 3, fy - 5, 1, 1);
+      R('#3a2414', fx + 3, fy, 1, 2);
+    } else {
+      R('#7a7a90', fx + 7, fy + 3, 1, 10);
       R('#c83a3a', fx, fy + 4, 6, 2);
       g.globalAlpha = 0.9;
       R('#ffd070', fx + 2, fy + 8, 2, 2);

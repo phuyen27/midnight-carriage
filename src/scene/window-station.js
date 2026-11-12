@@ -6,17 +6,17 @@ let stn = null,
   snT = rnd(8, 14);
 
 const WL = [
-  'Trên sân ga nhỏ, ai đó ôm chiếc ô chưa kịp mở, nhìn theo tàu.',
-  'Dưới mái ga, một bóng người đếm tàu qua, rồi mỉm cười như chưa thất vọng.',
-  'Người ấy ngồi dưới ngọn đèn, cúi viết gì đó rất lâu.',
-  'Người ấy giấu lá thư vào áo, vẫy tay thật khẽ.',
+  'Giữa mưa phùn, một người cầm ô nhìn theo tàu.',
+  'Dưới mái ga, người cầm ô đếm tàu qua, rồi mỉm cười như chưa thất vọng.',
+  'Người ấy đứng dưới ngọn đèn ga, ô vẫn chưa mở.',
+  'Giữa sương, người ấy kẹp ô dưới tay, vẫy rất khẽ.',
 ];
 
 const WP = [
   '',
   'Người ấy dường như nhận ra bạn, và nhìn theo lâu hơn lần trước.',
-  'Lần này người ấy cầm theo một chiếc đèn nhỏ, như đã quen đợi chuyến tàu này.',
-  'Người ấy chạy theo tàu vài bước, giơ cao một tờ giấy gấp.',
+  'Người ấy đã đứng gần mép sân ga hơn, như quen đợi chuyến tàu này.',
+  'Người ấy chạy theo tàu vài bước, giơ cao chiếc ô gấp.',
 ];
 
 function seeStn() {
