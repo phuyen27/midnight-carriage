@@ -58,7 +58,7 @@ function room(dt) {
   furnSeat();
   if (pax) {
     const y = pax.y + Math.sin(T * 1.6) * 0.6 + (pax.st == 'talk' ? Math.sin(T * 9) * 0.7 : 0);
-    g.drawImage(pax.d.spr, Math.round(pax.x), Math.round(y));
+    g.drawImage(pax.d.sprS[sea()],Math.round(pax.x), Math.round(y));
     if (pax.st == 'wait') {
       const b = Math.sin(T * 3) > 0 ? 0 : -1;
       R('#f6e3bf', pax.x + 8, pax.y - 10 + b, 14, 7);

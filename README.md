@@ -38,13 +38,16 @@ To host it on GitHub Pages: *Settings → Pages → Deploy from branch → `main
     ├── core/             # Canvas, utils, save data, runtime state
     ├── data/             # Passengers, story text, stages and palettes
     ├── gfx/              # Pixel-art sprites and passenger rendering
-    ├── scene/            # Window view, seasonal scenery, platform station, interior,
+    ├── scene/            # Window view, seasonal scenery, scenes.js (windmill hill, paddy, lake,
+    │                     # mountains, festival), platform station, interior,
     │                     # extras.js (wall letter, seasonal furniture, Mướp the cat, tunnel dark)
     ├── game/             # Decor, dialogue, collectibles, endings, update loop
     ├── input/            # Pointer handling
     ├── audio/            # Procedural Web Audio
     └── ui/               # HUD, notebook, top-bar controls
 ```
+
+Each season rides its own seven stations (`SEASON_ST` in `src/data/stages.js`), and passengers change outfit and speak a different pair of opening lines per season (`PS` in `src/data/passengers.js`).
 
 All scripts are classic `<script>` tags sharing one global scope. Keep the order in `index.html` when adding files.
 

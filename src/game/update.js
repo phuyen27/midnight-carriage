@@ -9,15 +9,14 @@ function nextStage() {
   si = (si + 1) % 7;
   stT = 0;
   S.stage = si;
-  if (si == 0) S.loop = (S.loop | 0) + 1;
+  if (si == 0) {
+    S.loop = (S.loop | 0) + 1;
+    applySeason(sea());
+  }
   save();
   bell();
   const s1 = sea();
-  toast(
-    (si == 0 ? 'Mùa ' + SN[s1] + ' · ' : 'Đến ') +
-      (si == 3 && s1 == 1 ? ST[si].n.slice(0, -1) + '▒' : ST[si].n),
-    3500,
-  );
+  toast((si == 0 ? 'Mùa ' + SN[s1] + ' · ' : 'Đến ') + stName(ST[si]), 3500);
   vs = stageSeed();
   xfT = 0;
   const b = [0, 3, 6].indexOf(si);
@@ -74,7 +73,7 @@ function update(dt) {
   if (!pax && stT > 3 && stT < LEN - 12) {
     const d = PX[S.order[S.pi++ % 6]],
       hl = sea() == 3 ? 2 : sea() >= 1 ? 0 : -1,
-      sy = d.say.slice();
+      sy = [...PS[d.n][sea()], ''];
     sy.splice(1, 0, SL[d.n][sea()]);
     if (hl >= 0) sy.splice(sy.length - 1, 0, HT[S.truth][hl + (S.pi & 1)]);
     sy[sy.length - 1] = GL[d.n](SG[d.n][sea()]);
@@ -147,7 +146,7 @@ function update(dt) {
     birds[i].x -= 22 * dt;
     if (birds[i].x < -6) birds.splice(i, 1);
   }
-  if (ST[si].k == 5 && (fwT -= dt) <= 0) {
+  if ((ST[si].k == 5 || (ST[si].k == 11 && sea() != 2)) && (fwT -= dt) <= 0) {
     fwT = rnd(1.5, 3.5);
     const cx = rnd(40, 170),
       cy = rnd(10, 40),

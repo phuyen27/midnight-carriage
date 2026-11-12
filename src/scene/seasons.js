@@ -115,7 +115,7 @@ function seasonSky(nf) {
 
 /** Two parallax rows of seasonal trees standing on the hills. */
 function seasonTrees(nf, k) {
-  if (k == 1 || k == 3 || k == 5 || k == 6) return;
+  if (k == 1 || k == 3 || k == 5 || k == 6 || k >= 8) return;
   const sn = sea(),
     BY = WY + WH;
   strip(34, 0.16, (x, r) => {
@@ -130,7 +130,7 @@ function seasonTrees(nf, k) {
 /** Ground flora and critters in the foreground. */
 function seasonGround(nf, k) {
   if (sea() == 3 && si < 3) fogBands(nf);
-  if (k == 3 || k == 6) return;
+  if (k == 3 || k == 6 || k == 8 || k == 9) return;
   if (k == 2 && sea() == 1) sunflowerField(nf);
   const sn = sea(),
     BY = WY + WH;

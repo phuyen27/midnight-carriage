@@ -27,7 +27,7 @@ requestAnimationFrame(frame);
 
 toast('Chạm vào đèn, tách trà, rèm cửa, cửa sổ… hoặc nhặt vật nhỏ trôi qua', 4500);
 
-setTimeout(() => toast('Mùa ' + SN[sea()] + ' · ' + ST[si].n, 3000), 5200);
+setTimeout(() => toast('Mùa ' + SN[sea()] + ' · ' + stName(ST[si]), 3000), 5200);
 
 if (si == 0) setTimeout(() => toast('Chuyện mùa ' + SN[sea()] + ': ' + SS[sea()][0], 9000), 9500);
 

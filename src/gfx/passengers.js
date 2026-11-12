@@ -34,7 +34,7 @@ function paxFx() {
   }
 }
 
-function mkPax(p) {
+function mkPax(p, sn = 0) {
   const c = mkc(30, 40),
     x = c.getContext('2d'),
     f = (col, a, b, w, h) => {
@@ -104,7 +104,33 @@ function mkPax(p) {
     f('#6a4a2a', 9, 0, 12, 4);
     f('#d8d0c0', 11, 15, 8, 1);
   }
+  if (sn == 1) {
+    // summer: lighter clothes, a conical hat (or a bandana for the animals)
+    f('rgba(255,255,255,.22)', 5, 20, 20, 20);
+    if (p.k != 'h') f('#58b4cc', 8, 17, 14, 2);
+    else if (p.acc != 'hat' && p.acc != 'beret') {
+      f('#e8d098', 4, 3, 22, 2);
+      f('#e8d098', 7, 1, 16, 2);
+      f('#e8d098', 11, 0, 8, 1);
+    }
+  } else if (sn == 2) {
+    // autumn: warm tint and a fallen leaf caught on the shoulder
+    f('rgba(216,96,42,.28)', 5, 18, 20, 22);
+    f('#d8602a', 21, 17, 3, 2);
+    f('#a8321e', 22, 19, 1, 1);
+  } else if (sn == 3) {
+    // winter: striped scarf, snow on the head
+    f('#c83a3a', 5, 17, 20, 4);
+    f('#f4ecd8', 5, 19, 20, 1);
+    f('#c83a3a', 6, 21, 4, 8);
+    f('#f4ecd8', 6, 25, 4, 1);
+    f('#ffffff', 9, 2, 3, 1);
+    f('#ffffff', 17, 3, 2, 1);
+  }
   return outline(c, '#1a0e08');
 }
 
-PX.forEach((p) => (p.spr = mkPax(p)));
+PX.forEach((p) => {
+  p.sprS = [0, 1, 2, 3].map((s) => mkPax(p, s));
+  p.spr = p.sprS[0];
+});

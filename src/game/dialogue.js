@@ -7,7 +7,7 @@ function talk() {
   if (pax.st == 'wait') {
     pax.st = 'talk';
     pax.line = 0;
-    S.stories[pax.d.n] = pax.d.say[0];
+    S.stories[pax.d.n] = pax.say[0];
     save();
     showLine();
   } else if (pax.st == 'talk') advance();

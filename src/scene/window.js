@@ -186,7 +186,8 @@ function outside(dt) {
             if (hs(r * 17 + i * 5 + j) > 0.5) R('#ffc65a', WX + x + i, BY - bh - 4 + j, 2, 2);
     });
   }
-  if (k != 3 && k != 6 && k != 5) ridge(BY - 7, 4, sc * 0.3, lc('near'), 0.05, 0.13);
+  if (k >= 7) sceneK(k, nf, lc, BY);
+  if (k != 3 && k != 6 && k != 5 && k < 8) ridge(BY - 7, 4, sc * 0.3, lc('near'), 0.05, 0.13);
   seasonTrees(nf, k);
   if (k == 0)
     strip(46, 0.5, (x, r) => {
@@ -241,7 +242,7 @@ function outside(dt) {
     const tx = Math.round(WX + stn.x),
       pb = BY - 9,
       se = sea(),
-      nm = ST[(si + 1) % 7].n,
+      nm = nextStation(si).n,
       ga = 0.25 + 0.35 * nf;
     R('#1c130d', tx, pb, 118, 2);
     R('#2e1f14', tx, pb + 2, 118, 7);
@@ -327,7 +328,7 @@ function outside(dt) {
       R(c, WX + x, WY + 7, 3, WH - 13);
     });
   }
-  if (k == 0 || k == 1 || k == 2 || k == 4) {
+  if (k == 0 || k == 1 || k == 2 || k == 4 || k == 7 || k == 10) {
     strip(20, 3.2, (x) => R('#0b0807', WX + x, BY - 8, 2, 8));
     R('#0b0807', WX, BY - 7, WW, 1);
   }
@@ -360,7 +361,7 @@ function outside(dt) {
     }
     g.globalAlpha = 1;
   }
-  if (nf > 0.6 && (k == 1 || k == 2 || k == 4))
+  if (nf > 0.6 && (k == 1 || k == 2 || k == 4 || k == 8 || (k == 9 && sea() != 3)))
     for (const f of flies) {
       f.x += Math.sin(T * f.s * 0.3 + f.p) * 10 * dt - 4 * dt;
       f.y += Math.cos(T * 0.7 + f.p) * 6 * dt;

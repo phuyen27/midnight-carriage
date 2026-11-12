@@ -10,7 +10,7 @@ function give(name, k) {
 
 function collect(o) {
   fl.splice(fl.indexOf(o), 1);
-  const nm = o.k == 'card' ? 'Bưu thiếp · ' + ST[si].n : IT[o.k].n;
+  const nm = o.k == 'card' ? 'Bưu thiếp · ' + stName(ST[si]) : IT[o.k].n;
   give(nm, o.k);
   plink();
   toast('Nhặt được: ' + nm);

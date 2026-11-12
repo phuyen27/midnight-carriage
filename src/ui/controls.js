@@ -15,7 +15,7 @@ $('nX').onclick = () => ($('note').style.display = 'none');
 $('nS').onclick = () => {
   const v = $('nt').value.trim();
   if (v) {
-    S.diary.push({ s: ST[si].n, t: v });
+    S.diary.push({ s: stName(ST[si]), t: v });
     save();
     toast('Đã viết vào nhật ký');
   }
