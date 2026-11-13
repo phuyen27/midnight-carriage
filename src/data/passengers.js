@@ -112,19 +112,19 @@ const PS = {
   'Anh họa sĩ': [
     ['Tôi vẽ những ga chẳng ai nhớ tên.', 'Cảnh đẹp nhất là lúc nó trôi qua.'],
     ['Tôi vẽ một gương mặt hoài chưa xong.', 'Đôi mắt vẫn để trống.'],
-    ['Bức nào cũng có người ngồi góc toa.', 'Tôi chưa dám đưa tận tay.'],
+    ['Tôi vẽ lại một ga em đã đi qua.', 'Manh mối nằm ngay trong tranh.'],
     ['Tôi vẽ xong đôi mắt rồi.', 'Em xem. Giống em lắm.'],
   ],
   'Bé Đèn Lồng': [
     ['Em đi tìm ông. Ông ở nơi nhiều đèn.', 'Đèn em còn nhỏ xíu.'],
     ['Em bắt đom đóm bỏ vào đèn.', 'Đèn sáng hơn rồi nè.'],
-    ['Trăng rằm to ghê. Nó theo em suốt.', 'Tìm mãi không thấy ông, ông có buồn không?'],
+    ['Trăng rằm to ghê. Nó theo em suốt.', 'Đèn em thắp được cho một người thôi đó.'],
     ['Đèn em sáng lâu rồi đó.', 'Chắc ông ở chỗ nào có đèn em thắp.'],
   ],
   'Bác lái buôn': [
     ['Bác bán trà cả đời.', 'Trà ngon cần một người ngồi cùng.'],
     ['Bác ít nói. Cháu đừng ngại.', 'Bác để trống một ghế, quen rồi.'],
-    ['Mẻ trà này ngon nhất đời bác.', 'Bác để dành, chờ người đến uống.'],
+    ['Bác pha trà theo tâm trạng. Khách nào cũng một ấm.', 'Cháu thì bác chưa đoán ra.'],
     ['Trà bác pha hơi đậm.', 'Đủ ấm cho hai người.'],
   ],
   'Cú Hiền': [
@@ -144,8 +144,8 @@ const FR = {
     'Hôm nào người cũng chờ, mà mình không tới. Lần này mình đi tìm người.',
     'Hôm nào người cũng chờ, mà mình không tới.',
   ],
-  'Anh họa sĩ': ['Điều mình giấu bấy lâu, nay mình đưa tận tay người.', 'Có điều mình chưa dám đưa tận tay người.'],
-  'Bé Đèn Lồng': ['Hồi nhỏ mình thả đèn. Mình tin người đã thấy.', 'Hồi nhỏ mình thả đèn, không biết người có thấy.'],
+  'Anh họa sĩ': ['Mình nhớ từng điều nhỏ về người, dù chưa dám nói.', 'Có điều mình chưa dám đưa tận tay người.'],
+  'Bé Đèn Lồng': ['Hồi nhỏ mình thả đèn. Hôm nay mình thắp một ngọn cho người.', 'Hồi nhỏ mình thả đèn, không biết người có thấy.'],
   'Bác lái buôn': ['Mình thương người, và nay mình nói ra.', 'Mình thương người hơn những gì mình từng nói.'],
   'Cú Hiền': ['Đêm không ngủ được, mình muốn kể cho người nghe.', 'Đêm không ngủ được, mình vẫn nghĩ về người.'],
 };
@@ -161,27 +161,6 @@ const QA = {
     o: [
       { t: 'Cháu sẽ về.', r: 'Ừ. Bà đợi. Bà đan thêm cho kịp.' },
       { t: 'Cháu chưa dám.', r: 'Không sao. Bà quen đợi rồi.' },
-    ],
-  },
-  'Anh họa sĩ': {
-    q: 'Tôi vẽ em từ lâu rồi. Em xem bức này nhé?',
-    o: [
-      { t: 'Cho tôi xem.', r: 'Cảm ơn em. Tôi đỡ sợ rồi.' },
-      { t: 'Để lần sau.', r: 'Ừ. Tôi vẫn giữ nó.' },
-    ],
-  },
-  'Bé Đèn Lồng': {
-    q: 'Chị có tin ông thấy đèn của em không?',
-    o: [
-      { t: 'Tin. Ông thấy mà.', r: 'Em cũng tin!' },
-      { t: 'Chị không biết.', r: 'Vậy em thắp thêm cho chắc.' },
-    ],
-  },
-  'Bác lái buôn': {
-    q: 'Cháu ngồi xuống uống với bác một tách không?',
-    o: [
-      { t: 'Dạ, có ạ.', r: 'Ngồi đi. Ghế này bác giữ từ lâu.' },
-      { t: 'Cháu bận rồi.', r: 'Ừ. Ghế vẫn để đó.' },
     ],
   },
 };
@@ -213,7 +192,33 @@ function askFor(n) {
       ),
     };
   }
-  if (n == 'Cú Hiền')
+  if (n == 'Anh họa sĩ')
+    return {
+      q: 'Bức này tôi vẽ lúc trời tím, có ba cánh diều. Là ga nào?',
+      o: [
+        { t: 'Ga Hồ Liễu', b: 0, r: 'Không phải. Là Ga Đồi Gió Diều, lúc tím chiều. Em nhớ nhé.' },
+        { t: 'Ga Đồi Gió Diều', b: 1, r: 'Đúng! Em nhìn kỹ hơn tôi tưởng.' },
+        { t: 'Ga Biển Nhỏ', b: 0, r: 'Không phải. Là Ga Đồi Gió Diều, lúc tím chiều. Em nhớ nhé.' },
+      ],
+    };
+  if (n == 'Bé Đèn Lồng')
+    return {
+      q: 'Đèn em thắp được cho một người thôi. Chị chọn ai?',
+      o: [
+        { t: 'Cho ông của em', b: 0, r: 'Đèn bay lên thật cao. Ông chắc thấy rồi!' },
+        { t: 'Cho người đang đợi chị', b: 1, r: 'Đèn sáng rực, bay về ga cuối. Người ấy sẽ biết chị đang tới.' },
+        { t: 'Cho chính chị', b: 0, r: 'Ấm tay chưa? Ai cũng cần một ngọn đèn cho riêng mình.' },
+      ],
+    };
+  if (n == 'Bác lái buôn')
+    return {
+      q: 'Hôm nay cháu thấy trong người thế nào?',
+      o: [
+        { t: 'Hơi mệt', b: 0, r: 'Trà sen. Mệt thì khỏi nói, bác hiểu.' },
+        { t: 'Hơi lo', b: 0, r: 'Trà gừng. Lo thì uống, uống xong lo cũng chẳng bớt, nhưng ấm.' },
+        { t: 'Có điều muốn nói', b: 1, r: 'Trà đậm. Muốn nói thì phải có sức. Ngồi đi, bác nghe.' },
+      ],
+    };  if (n == 'Cú Hiền')
     return {
       q: 'Hú. Cái gì chia cho người khác thì nhẹ đi một nửa?',
       o: [
