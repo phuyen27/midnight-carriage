@@ -75,6 +75,15 @@ function advance() {
           '”',
         7000,
       );
+    } else if (fr && S.frag[pax.d.n] !== fr) {
+      // the answer given this visit rewrites the line already on the letter
+      S.frag[pax.d.n] = fr;
+      LW[pax.d.n] = 0;
+      save();
+      toast(
+        (ng ? 'Nhận được: ' + gf + ' · ' : '') + 'Dòng thư được viết lại: “' + fr + '”',
+        7000,
+      );
     } else if (ng) toast('Nhận được: ' + gf);
     else toast('Mùa này bạn đã có quà của họ rồi, cảm ơn vì đã ghé nghe.');
   } else showLine();

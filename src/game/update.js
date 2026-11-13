@@ -83,7 +83,8 @@ function update(dt) {
     if (sea() == 3) sy.splice(sy.length - 1, 0, HT[si & 1]);
     sy[sy.length - 1] = GL[d.n](SG[d.n][sea()]);
     if (secretOK(d.n)) sy.splice(sy.length - 1, 0, TRUE[d.n]);
-    if (S.ans[d.n] === undefined) sy.splice(sy.length - 1, 0, { ask: QA[d.n] });
+    // the question comes in autumn or later, once you know each other (asked again until answered)
+    if (S.ans[d.n] === undefined && sea() >= 2) sy.splice(sy.length - 1, 0, { ask: QA[d.n] });
     pax = { d, say: sy, x: 340, y: 104, st: 'in', line: 0 };
     toast(d.n + ' lên tàu ở ' + stName(ST[si]), 2800);
   }

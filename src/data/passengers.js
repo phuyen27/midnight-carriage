@@ -151,9 +151,9 @@ const FR = {
 };
 
 /**
- * The question each passenger asks the first time you sit with them. o[0] is the brave
- * answer, o[1] the hesitant one; r is what they say back. The answer picks your letter line
- * and counts toward the ending.
+ * The question each passenger asks in autumn, after they have opened up to you. o[0] is the
+ * brave answer, o[1] the hesitant one; r is what they say back. Until then your letter line
+ * is the hesitant one; a brave answer rewrites it, and counts toward the ending.
  */
 const QA = {
   'Bà Tư': {
