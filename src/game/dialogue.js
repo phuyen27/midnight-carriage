@@ -36,10 +36,12 @@ function showLine() {
     l.ask.o.map((o) => o.t),
     (i) => {
       if (!pax || pax.d !== who || pax.st != 'talk') return;
-      S.ans[who.n] = i;
+      const o = l.ask.o[i];
+      S.ans[who.n] = o.b ? 0 : 1; // 0 = brave, 1 = hesitant
+      if (o.g) give(o.g, 'gift');
       save();
       plink();
-      pax.say[pax.line] = l.ask.o[i].r;
+      pax.say[pax.line] = o.r + (o.g ? ' (Nhận được: ' + o.g + ')' : '');
       showLine();
     },
   );

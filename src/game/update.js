@@ -84,7 +84,7 @@ function update(dt) {
     sy[sy.length - 1] = GL[d.n](SG[d.n][sea()]);
     if (secretOK(d.n)) sy.splice(sy.length - 1, 0, TRUE[d.n]);
     // the question comes in autumn or later, once you know each other (asked again until answered)
-    if (S.ans[d.n] === undefined && sea() >= 2) sy.splice(sy.length - 1, 0, { ask: QA[d.n] });
+    if (S.ans[d.n] === undefined && sea() >= 2) sy.splice(sy.length - 1, 0, { ask: askFor(d.n) });
     pax = { d, say: sy, x: 340, y: 104, st: 'in', line: 0 };
     toast(d.n + ' lên tàu ở ' + stName(ST[si]), 2800);
   }

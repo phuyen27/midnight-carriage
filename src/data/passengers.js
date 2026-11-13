@@ -104,9 +104,9 @@ const PS = {
     ['Khăn xong rồi. Dài lắm đấy.', 'Quấn hai vòng vẫn còn dư.'],
   ],
   'Chú mèo Mướp': [
-    ['Meo. Ga cuối có ô cửa đầy nắng.', 'Chú định đến đó ngủ một giấc.'],
-    ['Meo. Nóng quá, chú nằm sát cửa sổ.', 'Áo cháu có mùi ga cuối đấy.'],
-    ['Chú từng đợi ở ga cuối. Lâu lắm.', 'Quên mất đợi ai. Chỉ nhớ là vui.'],
+    ['Meo. Chú lên tàu không mua vé. Đừng nói ai nhé.', 'Ga cuối có ô cửa đầy nắng. Chú định ngủ ở đó.'],
+    ['Meo. Chú vừa ăn vụng cá của bác lái buôn.', 'Suỵt. Giờ cháu là đồng phạm rồi đấy.'],
+    ['Chú giấu một thứ trong toa này rồi.', 'Đừng nhìn chú. Chú không biết gì hết.'],
     ['Chú chui vào tay áo cháu nhé.', 'Ấm rồi. Chú ngủ đây.'],
   ],
   'Anh họa sĩ': [
@@ -129,8 +129,8 @@ const PS = {
   ],
   'Cú Hiền': [
     ['Hú. Ta canh sao suốt đêm.', 'Sao đi chậm, chẳng ai phải vội.'],
-    ['Con hay nhìn một ngôi sao.', 'Ta nhớ rồi. Ta đặt tên cho nó.'],
-    ['Gió mang mùi khói bếp.', 'Có ai ở xa đang nhớ con.'],
+    ['Một ngôi sao lặn rồi lại mọc. Nó có chết không?', 'Ta nghĩ nó chỉ đi ngủ thôi. Còn con?'],
+    ['Đêm dài, ta rảnh nên nghĩ ra một câu đố.', 'Đoán đúng ta chẳng tặng gì. Chỉ được vui thôi.'],
     ['Sắp sáng rồi.', 'Ta ngủ đây. Con cứ đi tiếp.'],
   ],
 };
@@ -141,13 +141,13 @@ const PS = {
 const FR = {
   'Bà Tư': ['Xin lỗi người. Mình sẽ về thăm.', 'Xin lỗi người, mình chưa dám về thăm.'],
   'Chú mèo Mướp': [
-    'Hôm nào người cũng chờ, mà mình không tới. Lần này mình tới.',
+    'Hôm nào người cũng chờ, mà mình không tới. Lần này mình đi tìm người.',
     'Hôm nào người cũng chờ, mà mình không tới.',
   ],
   'Anh họa sĩ': ['Điều mình giấu bấy lâu, nay mình đưa tận tay người.', 'Có điều mình chưa dám đưa tận tay người.'],
   'Bé Đèn Lồng': ['Hồi nhỏ mình thả đèn. Mình tin người đã thấy.', 'Hồi nhỏ mình thả đèn, không biết người có thấy.'],
   'Bác lái buôn': ['Mình thương người, và nay mình nói ra.', 'Mình thương người hơn những gì mình từng nói.'],
-  'Cú Hiền': ['Đêm không ngủ được, mình không còn sợ nữa.', 'Đêm không ngủ được, mình vẫn nghĩ về người.'],
+  'Cú Hiền': ['Đêm không ngủ được, mình muốn kể cho người nghe.', 'Đêm không ngủ được, mình vẫn nghĩ về người.'],
 };
 
 /**
@@ -161,13 +161,6 @@ const QA = {
     o: [
       { t: 'Cháu sẽ về.', r: 'Ừ. Bà đợi. Bà đan thêm cho kịp.' },
       { t: 'Cháu chưa dám.', r: 'Không sao. Bà quen đợi rồi.' },
-    ],
-  },
-  'Chú mèo Mướp': {
-    q: 'Meo. Ga cuối có người đợi. Cháu có xuống không?',
-    o: [
-      { t: 'Cháu sẽ xuống.', r: 'Meo! Chú giữ chỗ nắng cho cháu.' },
-      { t: 'Để cháu nghĩ đã.', r: 'Ừ. Chú vẫn ở đây.' },
     ],
   },
   'Anh họa sĩ': {
@@ -191,14 +184,47 @@ const QA = {
       { t: 'Cháu bận rồi.', r: 'Ừ. Ghế vẫn để đó.' },
     ],
   },
-  'Cú Hiền': {
-    q: 'Đêm nay con muốn ta canh giấc cho con không?',
-    o: [
-      { t: 'Có ạ.', r: 'Ngủ đi. Ta thức.' },
-      { t: 'Con tự lo được.', r: 'Ừ. Ta vẫn ngồi đây.' },
-    ],
-  },
 };
+
+/** Where Mướp can hide something: [what you tap, where it is in the story]. */
+const HIDE = [
+  ['Dưới cái gối', 'dưới cái gối'],
+  ['Trong ấm trà', 'trong ấm trà'],
+  ['Trong cuộn khăn len', 'trong cuộn khăn len'],
+];
+
+/**
+ * The question a passenger asks, as { q, o: [{ t, r, b, g? }] }: b marks the answer that counts
+ * as brave (letter line + ending), g is an item given for it. Most are a plain yes/no of
+ * courage; Mướp plays hide-and-seek and Cú Hiền sets a riddle, so the six don't feel alike.
+ */
+function askFor(n) {
+  if (n == 'Chú mèo Mướp') {
+    if (S.hid === undefined) {
+      S.hid = (Math.random() * HIDE.length) | 0;
+      save();
+    }
+    return {
+      q: 'Meo! Chú giấu một thứ trong toa này. Đoán xem ở đâu nào?',
+      o: HIDE.map((h, i) =>
+        i == S.hid
+          ? { t: h[0], b: 1, g: 'Viên kẹo mèo giấu', r: 'Meo?! Sao cháu biết! Chú phục rồi. Đây, của cháu.' }
+          : { t: h[0], b: 0, r: 'Hihi sai rồi! Nó ở ' + HIDE[S.hid][1] + ' cơ. Mai chú giấu chỗ khác!' },
+      ),
+    };
+  }
+  if (n == 'Cú Hiền')
+    return {
+      q: 'Hú. Cái gì chia cho người khác thì nhẹ đi một nửa?',
+      o: [
+        { t: 'Cái bánh', b: 0, r: 'Bánh chia thì hết. Nhưng có thứ chia ra lại nhẹ đi: nỗi buồn.' },
+        { t: 'Nỗi buồn', b: 1, r: 'Đúng. Kể cho một người, nó chỉ còn một nửa. Con hiểu rồi.' },
+        { t: 'Niềm vui', b: 0, r: 'Niềm vui chia ra lại nhân đôi. Cái nhẹ đi là nỗi buồn đấy.' },
+      ],
+    };
+  const q = QA[n];
+  return { q: q.q, o: q.o.map((o, i) => ({ ...o, b: i == 0 ? 1 : 0 })) };
+}
 /** Each passenger's own parting words (used in the epilogue chat). */
 const FQ = {
   'Bà Tư': 'Có những chuyến đi dài mười năm, chỉ để được ngồi cạnh một người.',
