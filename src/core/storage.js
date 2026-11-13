@@ -23,6 +23,7 @@ const DEF = () => ({
   fin: 0,
   loop: 0,
   gifted: {},
+  ans: {},
   deco: {},
   radio: 0,
   order: [0, 1, 2, 3, 4, 5].sort(() => Math.random() - 0.5),

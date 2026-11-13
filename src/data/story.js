@@ -12,9 +12,22 @@ const HT = [
 const TH = `Trong túi áo, lá thư khẽ ấm lên như vừa có ai cầm.`;
 
 /**
+ * The ticket is the mystery of the journey: who bought it? One new clue each season
+ * (TK[season]); the answer, TK[4], is shown with the ending.
+ */
+const TK = [
+  `Chiếc vé trong túi áo: tên hành khách đã mờ, ô “Người mua vé” cũng để trống. Ai đã mua nó?`,
+  `Chiếc vé nóng lên. Điểm đến hiện ra: “Nơi có người đang đợi.”`,
+  `Ô “Người mua vé” hiện một nét chữ lạ, mảnh và run, như viết ngoài trời lạnh.`,
+  `Tên bạn đã hiện rõ trên vé. Người mua vé chỉ còn thiếu một nét nữa.`,
+  `Chiếc vé hiện rõ lần cuối: “Hành khách: bạn. Người mua vé: người đứng đợi ở ga cuối.” Họ đã gửi vé cho bạn từ rất lâu.`,
+];
+
+/**
  * Endings. Which one you get depends on how much of the letter you wrote (see finale()):
- * 0 none -> 5, 1 line -> 1, 2-3 -> 3, 4-5 -> 0 (or 2 without a diary), 6 -> 4,
- * then 6, 7, 8 are special endings for gifts, the platform figure and all six secrets.
+ * 0 lines -> 5, 1 -> 1, 2-3 -> 3, 4-5 -> 0 (or 2 without a diary); a full letter (6) -> 4 with
+ * 4+ brave answers, 0 with 2-3, 1 with fewer. Then 6, 7, 8 are special endings for gifts,
+ * the platform figure and all six secrets.
  */
 const EN = [
     [

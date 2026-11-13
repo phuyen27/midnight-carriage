@@ -23,11 +23,31 @@ function talk() {
 }
 
 function showLine() {
-  say(pax.d.n, pax.say[pax.line], 1);
+  const l = pax.say[pax.line];
+  if (typeof l == 'string') {
+    say(pax.d.n, l, 1);
+    return;
+  }
+  // a question: the answer is stored, shapes the letter line, and gets a reply
+  const who = pax.d;
+  ask(
+    who.n,
+    l.ask.q,
+    l.ask.o.map((o) => o.t),
+    (i) => {
+      if (!pax || pax.d !== who || pax.st != 'talk') return;
+      S.ans[who.n] = i;
+      save();
+      plink();
+      pax.say[pax.line] = l.ask.o[i].r;
+      showLine();
+    },
+  );
 }
 
 function advance() {
   if (!pax || pax.st != 'talk') return;
+  if (typeof pax.say[pax.line] != 'string') return; // must answer the question first
   pax.line++;
   if (pax.line >= pax.say.length) {
     pax.st = 'done';
@@ -40,7 +60,7 @@ function advance() {
       give(gf, 'gift');
     }
     plink();
-    const fr = FR[pax.d.n];
+    const fr = FR[pax.d.n][S.ans[pax.d.n] === 0 ? 0 : 1];
     if (fr && !S.frag[pax.d.n]) {
       S.frag[pax.d.n] = fr;
       LW[pax.d.n] = 0;

@@ -34,6 +34,7 @@ if (si == 0) setTimeout(() => toast('Chuyện mùa ' + SN[sea()] + ': ' + SS[sea
 if (!S.intro) {
   S.intro = 1;
   save();
+  setTimeout(() => toast(TK[0], 6000), 21000);
   setTimeout(
     () =>
       say(

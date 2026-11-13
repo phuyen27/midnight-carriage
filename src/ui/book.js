@@ -25,7 +25,11 @@ function openBook() {
     '<h3>Lá thư dang dở (' +
     fk.length +
     '/6)</h3>' +
-    letterHTML(S.fin);
+    letterHTML(S.fin) +
+    '<h3>Chiếc vé</h3>' +
+    TK.slice(0, S.fin ? 5 : Math.min(3, S.loop | 0) + 1)
+      .map((l) => '<p>' + esc(l) + '</p>')
+      .join('');
   if (((S.wsee | 0) & 15) == 15)
     h += '<p><i>Tái bút, bằng nét chữ lạ: “Tôi vẫn đang đợi bạn ở ga cuối.”</i></p>';
   h +=

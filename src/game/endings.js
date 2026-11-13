@@ -57,12 +57,13 @@ function finale() {
   S.fin = 1;
   const fk = Object.keys(S.frag).length,
     ks = new Set(Object.values(S.items).map((o) => o.k));
+  const br = Object.values(S.ans).filter((v) => v === 0).length; // brave answers
   let e;
   if (PX.every((p) => secretOK(p.n))) e = 8;
   else if ((S.wsee | 0) == 15 && fk >= 6 && S.seen[6]) e = 7;
   else if (fk >= 6 && ['leaf', 'shell', 'ticket', 'card', 'gift'].every((k) => ks.has(k))) e = 6;
-  // otherwise the ending follows how much of the letter was written
-  else if (fk >= 6) e = 4;
+  // otherwise the ending follows how much of the letter was written, and how boldly
+  else if (fk >= 6) e = br >= 4 ? 4 : br >= 2 ? 0 : 1;
   else if (fk >= 4) e = S.diary.length ? 0 : 2;
   else if (fk >= 2) e = 3;
   else e = fk == 1 ? 1 : 5;
@@ -70,7 +71,9 @@ function finale() {
   S.lastEnd = e;
   save();
   $('bk').innerHTML =
-    '<h3>Lá thư bạn đã viết</h3>' +
+    '<h3>Chiếc vé</h3><p>' +
+    esc(TK[4]) +
+    '</p><h3>Lá thư bạn đã viết</h3>' +
     letterHTML(1) +
     '<h3>' +
     esc(EN[e][0]) +

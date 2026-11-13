@@ -135,19 +135,70 @@ const PS = {
   ],
 };
 /**
- * The letter, one line per passenger, in the writer's own voice. Each line is the word
- * that passenger stands for; together they read as one letter to the person who waited.
- * Always shown in PX order (see letterHTML in book.js).
+ * The letter, one line per passenger, in the writer's own voice: [brave, hesitant] depending
+ * on how the player answered that passenger's question (see QA). Always shown in PX order.
  */
 const FR = {
-  'Bà Tư': 'Xin lỗi người, mình chưa một lần về thăm.',
-  'Chú mèo Mướp': 'Hôm nào người cũng chờ, mà mình không tới.',
-  'Anh họa sĩ': 'Có điều mình chưa dám đưa tận tay người.',
-  'Bé Đèn Lồng': 'Hồi nhỏ mình thả đèn, mong người nhìn thấy.',
-  'Bác lái buôn': 'Mình thương người hơn những gì mình từng nói.',
-  'Cú Hiền': 'Đêm không ngủ được, mình vẫn nghĩ về người.',
+  'Bà Tư': ['Xin lỗi người. Mình sẽ về thăm.', 'Xin lỗi người, mình chưa dám về thăm.'],
+  'Chú mèo Mướp': [
+    'Hôm nào người cũng chờ, mà mình không tới. Lần này mình tới.',
+    'Hôm nào người cũng chờ, mà mình không tới.',
+  ],
+  'Anh họa sĩ': ['Điều mình giấu bấy lâu, nay mình đưa tận tay người.', 'Có điều mình chưa dám đưa tận tay người.'],
+  'Bé Đèn Lồng': ['Hồi nhỏ mình thả đèn. Mình tin người đã thấy.', 'Hồi nhỏ mình thả đèn, không biết người có thấy.'],
+  'Bác lái buôn': ['Mình thương người, và nay mình nói ra.', 'Mình thương người hơn những gì mình từng nói.'],
+  'Cú Hiền': ['Đêm không ngủ được, mình không còn sợ nữa.', 'Đêm không ngủ được, mình vẫn nghĩ về người.'],
 };
 
+/**
+ * The question each passenger asks the first time you sit with them. o[0] is the brave
+ * answer, o[1] the hesitant one; r is what they say back. The answer picks your letter line
+ * and counts toward the ending.
+ */
+const QA = {
+  'Bà Tư': {
+    q: 'Cháu có định về thăm bà không?',
+    o: [
+      { t: 'Cháu sẽ về.', r: 'Ừ. Bà đợi. Bà đan thêm cho kịp.' },
+      { t: 'Cháu chưa dám.', r: 'Không sao. Bà quen đợi rồi.' },
+    ],
+  },
+  'Chú mèo Mướp': {
+    q: 'Meo. Ga cuối có người đợi. Cháu có xuống không?',
+    o: [
+      { t: 'Cháu sẽ xuống.', r: 'Meo! Chú giữ chỗ nắng cho cháu.' },
+      { t: 'Để cháu nghĩ đã.', r: 'Ừ. Chú vẫn ở đây.' },
+    ],
+  },
+  'Anh họa sĩ': {
+    q: 'Tôi vẽ em từ lâu rồi. Em xem bức này nhé?',
+    o: [
+      { t: 'Cho tôi xem.', r: 'Cảm ơn em. Tôi đỡ sợ rồi.' },
+      { t: 'Để lần sau.', r: 'Ừ. Tôi vẫn giữ nó.' },
+    ],
+  },
+  'Bé Đèn Lồng': {
+    q: 'Chị có tin ông thấy đèn của em không?',
+    o: [
+      { t: 'Tin. Ông thấy mà.', r: 'Em cũng tin!' },
+      { t: 'Chị không biết.', r: 'Vậy em thắp thêm cho chắc.' },
+    ],
+  },
+  'Bác lái buôn': {
+    q: 'Cháu ngồi xuống uống với bác một tách không?',
+    o: [
+      { t: 'Dạ, có ạ.', r: 'Ngồi đi. Ghế này bác giữ từ lâu.' },
+      { t: 'Cháu bận rồi.', r: 'Ừ. Ghế vẫn để đó.' },
+    ],
+  },
+  'Cú Hiền': {
+    q: 'Đêm nay con muốn ta canh giấc cho con không?',
+    o: [
+      { t: 'Có ạ.', r: 'Ngủ đi. Ta thức.' },
+      { t: 'Con tự lo được.', r: 'Ừ. Ta vẫn ngồi đây.' },
+    ],
+  },
+};
 /** Each passenger's own parting words (used in the epilogue chat). */
 const FQ = {
   'Bà Tư': 'Có những chuyến đi dài mười năm, chỉ để được ngồi cạnh một người.',

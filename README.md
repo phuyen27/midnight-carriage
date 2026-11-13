@@ -41,7 +41,8 @@ To host it on GitHub Pages: *Settings → Pages → Deploy from branch → `main
     ├── scene/            # Window view, seasonal scenery, scenes.js (windmill hill, paddy, lake,
     │                     # mountains, festival), platform station, interior,
     │                     # extras.js (wall letter, seasonal furniture, Mướp the cat, tunnel dark)
-    ├── game/             # Decor, dialogue, collectibles, endings, update loop
+    ├── game/             # Decor, dialogue, collectibles, endings, events.js (one-off station
+    │                     # moments), update loop
     ├── input/            # Pointer handling
     ├── audio/            # Procedural Web Audio
     └── ui/               # HUD, notebook, top-bar controls

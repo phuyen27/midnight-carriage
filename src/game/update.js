@@ -19,6 +19,7 @@ function nextStage() {
   toast((si == 0 ? 'Mùa ' + SN[s1] + ' · ' : 'Đến ') + stName(ST[si]), 3500);
   vs = stageSeed();
   xfT = 0;
+  if (si == 0 && s1 > 0) setTimeout(() => toast(TK[s1], 5000), 14000);
   const b = [0, 3, 6].indexOf(si);
   if (b >= 0) setTimeout(() => toast('Chuyện mùa ' + SN[s1] + ': ' + SS[s1][b], 9000), 4200);
   if (si == 5 && s1 == 3) setTimeout(() => toast(TH, 4200), 4200);
@@ -44,6 +45,10 @@ function update(dt) {
   mA += ((wx == 1 ? 1 : 0) - mA) * Math.min(1, dt * 0.7);
   spd = stT < 3 ? lerp(0.25, 1, stT / 3) : stT > LEN - 4 ? lerp(1, 0.25, (stT - LEN + 4) / 4) : 1;
   if (tun > 0) spd = 1;
+  if (stopT > 0) {
+    stopT -= dt;
+    spd = 0;
+  }
   sc += 60 * spd * dt;
   if (stT >= LEN) nextStage();
   curt += (curtT - curt) * Math.min(1, dt * 3);
@@ -78,6 +83,7 @@ function update(dt) {
     if (sea() == 3) sy.splice(sy.length - 1, 0, HT[si & 1]);
     sy[sy.length - 1] = GL[d.n](SG[d.n][sea()]);
     if (secretOK(d.n)) sy.splice(sy.length - 1, 0, TRUE[d.n]);
+    if (S.ans[d.n] === undefined) sy.splice(sy.length - 1, 0, { ask: QA[d.n] });
     pax = { d, say: sy, x: 340, y: 104, st: 'in', line: 0 };
     toast(d.n + ' lên tàu ở ' + stName(ST[si]), 2800);
   }
@@ -195,6 +201,7 @@ function update(dt) {
     else if (stn.pg >= 3) stn.fo = cl((100 - stn.x) * 0.5, 0, 38);
   }
   extrasUpdate(dt);
+  eventsUpdate();
 }
 
 let tunA = 0;
